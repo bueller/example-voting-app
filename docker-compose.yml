@@ -5,7 +5,7 @@ services:
   vote:
     labels:
       shipyard.route: '/vote'
-      shipyard.rewrite: true
+      shipyard.route.rewrite: true
     build: ./vote
     command: python app.py
     volumes:
@@ -19,7 +19,7 @@ services:
   result:
     labels:
       shipyard.route: '/result'
-      shipyard.rewrite: true
+      shipyard.route.rewrite: true
     build: ./result
     command: nodemon server.js
     volumes:
