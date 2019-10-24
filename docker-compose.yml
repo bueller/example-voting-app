@@ -1,7 +1,11 @@
 version: "3"
 
 services:
+
   vote:
+    labels:
+      shipyard.route: '/vote'
+      shipyard.rewrite: true
     build: ./vote
     command: python app.py
     volumes:
@@ -13,6 +17,9 @@ services:
       - back-tier
 
   result:
+    labels:
+      shipyard.route: '/result'
+      shipyard.rewrite: true
     build: ./result
     command: nodemon server.js
     volumes:
