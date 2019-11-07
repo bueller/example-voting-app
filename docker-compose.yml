@@ -4,8 +4,7 @@ services:
 
   vote:
     labels:
-      shipyard.route: '/vote'
-      shipyard.route.rewrite: true
+      shipyard.route: '/'
     build: ./vote
     command: python app.py
     volumes:
