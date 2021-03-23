@@ -17,8 +17,7 @@ services:
 
   result:
     labels:
-      shipyard.route: '/result'
-      shipyard.route.rewrite: true
+      shipyard.route: '/'
     build: ./result
     command: nodemon server.js
     volumes:
