@@ -5,6 +5,7 @@ services:
   vote:
     labels:
       shipyard.route: '/'
+      shipyard.primary-route: true
     build: ./vote
     command: python app.py
     volumes:
