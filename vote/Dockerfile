@@ -1,15 +1,20 @@
-# Using official python runtime base image
-FROM python:2.7-alpine
+# Define a base stage that uses the official python runtime base image
+FROM python:3.11-slim
+
+# Add curl for healthcheck
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the application directory
 WORKDIR /app
 
 # Install our requirements.txt
-ADD requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy our code from the current folder to /app inside the container
-ADD . /app
+# Copy our code from the current folder to the working directory inside the container
+COPY . .
 
 # Make port 80 available for links and/or publish
 EXPOSE 80
