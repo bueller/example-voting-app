@@ -21,7 +21,7 @@ services:
       shipyard.route: '/result'
       shipyard.route.rewrite: true
     build: ./result
-    command: nodemon server.js
+    entrypoint: nodemon --inspect=0.0.0.0 server.js
     volumes:
       - ./result:/app
     ports:
@@ -49,6 +49,10 @@ services:
 
   db:
     image: postgres:9.4
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: '/var/lib/postgresql/data/pgdata'
     container_name: db
     volumes:
       - "db-data:/var/lib/postgresql/data"
