@@ -35,8 +35,7 @@ services:
     build:
       context: ./worker
       args:
-        - BUILDPLATFORM: ${BUILDPLATFORM}
-        - TARGETARCH: ${TARGETARCH}
+        - APPLICATION_ID: ${APP_ID}
     depends_on:
       - "redis"
       - "db"
