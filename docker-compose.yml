@@ -34,8 +34,6 @@ services:
   worker:
     build:
       context: ./worker
-      args:
-        - APPLICATION_ID: ${APP_ID}
     depends_on:
       - "redis"
       - "db"
