@@ -4,10 +4,14 @@ services:
 
   vote:
     labels:
-      shipyard.route: '/vote'
-      shipyard.route.rewrite: true
+      shipyard.route: '/'
+      shipyard.primary-route: true
     build: ./vote
+    # use python rather than gunicorn for local dev
     command: python app.py
+    depends_on:
+      redis:
+        condition: service_healthy 
     volumes:
      - ./vote:/app
     ports:
@@ -18,15 +22,17 @@ services:
 
   result:
     labels:
-      shipyard.route: '/result'
-      shipyard.route.rewrite: true
+      shipyard.route: '/'
     build: ./result
-    entrypoint: nodemon --inspect=0.0.0.0 server.js
+    # use nodemon rather than node for local dev
+    command: nodemon server.js
+    depends_on:
+      db:
+        condition: service_healthy 
     volumes:
       - ./result:/app
     ports:
       - "5001:80"
-      - "5858:5858"
     networks:
       - front-tier
       - back-tier
